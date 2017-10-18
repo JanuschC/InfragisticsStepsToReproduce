@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="TestPrismUnityApp.Views.ItemSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:ig="http://schemas.infragistics.com/xaml"
+             xmlns:editors="http://infragistics.com/Editors"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="#FAFAFA"
+             Width="400">
+    <StackPanel>
+
+        <TextBlock FontSize="24"
+                   Foreground="DarkBlue"
+                   Margin="10">ComboBox Selection</TextBlock>
+
+        <TextBlock Margin="10"
+                   TextWrapping="Wrap">
+            Problem with Infrgistics Shared XML Control XamComboEditor <Bold>Version 2017.1</Bold>.
+            On new instance of the View is everythink ok. 
+            When the view is reopened, the comboboxes can not get focus. You can not cycle with Tab key over the comboboxes.
+        </TextBlock>
+
+        <TextBlock Margin="10"
+                   TextWrapping="Wrap"
+                   FontWeight="Bold">Cycle single control with Tab key:</TextBlock>
+        <Grid FocusManager.FocusedElement="{Binding ElementName=FirstItem}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ig:XamComboEditor Grid.Row="0"
+                               Margin="6"
+                               ItemsSource="{Binding Notification.Items}"
+                               DisplayMemberPath="Name"
+                               SelectedValuePath="Id"
+                               x:Name="FirstItem"
+                               AllowDrop="True"
+                               SelectedItem="{Binding SelectedItem1}" />
+            <ig:XamComboEditor Grid.Row="1"
+                               Margin="6"
+                               AllowDrop="True"
+                               ItemsSource="{Binding Notification.Items}"
+                               DisplayMemberPath="Name"
+                               SelectedValuePath="Id"
+                               SelectedItem="{Binding SelectedItem2}" />
+            <ig:XamComboEditor Grid.Row="2"
+                               Margin="6"
+                               ItemsSource="{Binding Notification.Items}"
+                               DisplayMemberPath="Name"
+                               SelectedValuePath="Id"
+                               SelectedItem="{Binding SelectedItem3}" />
+            <editors:XamTextEditor Grid.Row="3"
+                                   Margin="6" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Margin="10"
+                    Command="{Binding SaveCommand}">Submit</Button>
+            <Button Grid.Column="1"
+                    Margin="10"
+                    Command="{Binding CancelCommand}">Cancel</Button>
+        </Grid>
+    </StackPanel>
+</UserControl>
